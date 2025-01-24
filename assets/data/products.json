@@ -1,0 +1,24 @@
+[
+    {
+      "name": "Smartphone",
+      "image": "assets/images/smartphone.jpg",
+      "price": "฿15,000"
+    },
+    {
+      "name": "Laptop",
+      "image": "assets/images/laptop.png",
+      "price": "฿25,000"
+    },
+    {
+      "name": "Smartwatch",
+      "image": "assets/images/smartwatch.jpg",
+      "price": "฿8,000"
+    },
+    {
+      "name": "Headphones",
+      "image": "assets/images/headphones.jpg",
+      "price": "฿2,500"
+    }
+  ]
+  
+  

@@ -13,6 +13,7 @@ class SETravelApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SE-Travel',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -113,38 +114,35 @@ class HotelTile extends StatelessWidget {
               amenities: amenities),
         ),
       )),
-      child: Card(
-        margin: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                image,
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/' + image,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "฿" "$price" "/" "คืน",
-                    style: const TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ],
-              ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  "฿" "$price" "/" "คืน",
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -171,70 +169,84 @@ class HotelDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Center(
-            child: Text(name),
-          ),
+        title: Text(name),
+        actions: [
           IconButton(
             onPressed: () => (),
             icon: const Icon(Icons.favorite_border_outlined),
           )
         ],
-      )),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Center(
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
+                Center(
+                  child: Image.asset(
+                    'assets/' + image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.location_pin),
+                    Row(
+                      children: [
+                        Icon(Icons.location_pin, color: Colors.red),
+                        Text(
+                          location,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                        ),
+                      ],
+                    ),
                     Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
+                      "฿" "$price" "/คืน",
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
-                Text(
-                  "฿" "$price" "/คืน",
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
+                Container(
+                  margin: EdgeInsets.only(top: 8, bottom: 8),
+                  child: Text(detail)
                 ),
-              ],
-            ),
-            Column(
-              children: [
-                Padding(padding: EdgeInsets.all(10.0)),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: amenities
-                      .map<Widget>((e) => Text(
-                            e,
-                            textAlign: TextAlign.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: amenities
+                          .map<Widget>((e) => Row(
+                            children: [
+                              Icon(Icons.check),
+                              Container(
+                                margin: EdgeInsets.only(left: 8),
+                                child: Text(
+                                      e,
+                                      textAlign: TextAlign.center,
+                                    ),
+                              ),
+                            ],
                           ))
-                      .toList(),
+                          .toList(),
+                    ),
+                  ],
                 ),
               ],
             ),
-            ElevatedButton(
-                child: const Text('จองห้องพัก'),
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                )),
+            Container(
+              child: ElevatedButton(
+                  child: const Text('จองห้องพัก'),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                  )),
+            ),
           ],
         ),
       ),
